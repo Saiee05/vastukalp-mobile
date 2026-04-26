@@ -192,27 +192,33 @@ export default function ProjectsScreen() {
   };
 
   const deleteProject = async (id: number) => {
-    Alert.alert("Delete Project", "Are you sure you want to delete this project?", [
-      { text: "Cancel", style: "cancel" },
-      {
-        text: "Delete",
-        style: "destructive",
-        onPress: async () => {
-          try {
-            const response = await deleteProjectApi(id);
-            if (!response.success) {
-              Alert.alert("Delete failed", response.message || "Could not delete project");
-              return;
-            }
-            await fetchProjects();
-          } catch (err) {
-            console.log(err);
-            Alert.alert("Error", "Could not delete project");
+  Alert.alert("Delete Project", "Are you sure you want to delete this project?", [
+    { text: "Cancel", style: "cancel" },
+    {
+      text: "Delete",
+      style: "destructive",
+      onPress: async () => {
+        try {
+          const response = await deleteProjectApi(id);
+
+          if (!response || response.success !== true) {
+            Alert.alert(
+              "Delete failed",
+              response?.message || "Could not delete project"
+            );
+            return;
           }
-        },
+
+          await fetchProjects();
+          Alert.alert("Success", "Project deleted successfully");
+        } catch (err) {
+          console.log(err);
+          Alert.alert("Error", "Could not delete project");
+        }
       },
-    ]);
-  };
+    },
+  ]);
+};
 
   const openWorkspace = (project: any) => {
     router.push({
