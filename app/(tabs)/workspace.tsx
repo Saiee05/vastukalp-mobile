@@ -45,7 +45,13 @@ export default function WorkspaceScreen() {
       return;
     }
 
-    const fileUrl = `${BASE_URL}/uploads/${filename}`;
+    const fileNameString = String(filename);
+
+    const fileUrl = fileNameString.startsWith("http")
+      ? fileNameString
+      : fileNameString.startsWith("uploads/")
+      ? `${BASE_URL}/${fileNameString}`
+      : `${BASE_URL}/uploads/${fileNameString}`;
 
     try {
       const supported = await Linking.canOpenURL(fileUrl);
@@ -91,7 +97,6 @@ export default function WorkspaceScreen() {
       </View>
 
       <View style={styles.grid}>
-        {/* FINANCE */}
         <TouchableOpacity
           style={styles.card}
           onPress={() =>
@@ -112,7 +117,6 @@ export default function WorkspaceScreen() {
           </Text>
         </TouchableOpacity>
 
-        {/* FILES */}
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Project Files</Text>
 

@@ -247,7 +247,11 @@ export default function ProjectsScreen() {
       return;
     }
 
-    const fileUrl = `${BASE_URL}/uploads/${filename}`;
+    const fileUrl = filename.startsWith("http")
+      ? filename
+      : filename.startsWith("uploads/")
+      ? `${BASE_URL}/${filename}`
+      : `${BASE_URL}/uploads/${filename}`;
 
     try {
       const supported = await Linking.canOpenURL(fileUrl);
