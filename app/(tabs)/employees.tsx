@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import {
-    ActivityIndicator,
-    Alert,
-    Modal,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  ActivityIndicator,
+  Alert,
+  Modal,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import {
-    addEmployeeApi,
-    deleteEmployeeApi,
-    getEmployeesApi,
-    updateEmployeeApi,
+  addEmployeeApi,
+  deleteEmployeeApi,
+  getEmployeesApi,
+  updateEmployeeApi,
 } from "../lib/api";
 
 export default function EmployeesScreen() {
